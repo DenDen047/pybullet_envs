@@ -30,6 +30,11 @@ class WalkerBase(MJCFBasedRobot):
         for n, j in enumerate(self.ordered_joints):
             j.set_motor_torque(self.power * j.power_coef * float(np.clip(a[n], -1, +1)))
 
+    def apply_action_position(self, a):
+        assert (np.isfinite(a).all())
+        for i, j in enumerate(self.ordered_joints):
+            j.set_position(float(np.clip(a[i], -1, +1)))
+
     def calc_state(self):
         j = np.array([j.current_relative_position() for j in self.ordered_joints], dtype=np.float32).flatten()
         # even elements [0::2] position, scaled to -1..+1 between limits

@@ -3,7 +3,7 @@
 CMD="tensorboard --logdir=$1 --port=6006"
 
 docker run -it --rm \
-    -v /data2/naoya/agents:/data \
+    -v /data2/naoya/pybullet_envs:/data \
     -w /data \
     -p 6006:6006 \
     tensorflow/tensorflow \
